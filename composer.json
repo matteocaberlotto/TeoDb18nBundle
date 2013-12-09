@@ -1,0 +1,29 @@
+{
+    "name": "teo/db18n-bundle",
+    "type": "symfony-bundle",
+    "description": "An easy db based labeling for translation with admin area",
+    "keywords": ["symfony", "db", "i18n", "bundle"],
+    "homepage": "https://github.com/matteocaberlotto",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matteo Caberlotto",
+            "homepage": "https://github.com/matteocaberlotto/TeoDb18nBundle/graphs/contributors"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/framework-bundle": "2.*"
+    },
+    "require-dev": {
+    },
+    "suggests": {
+    },
+    "autoload": {
+        "psr-0": { "Teo\\Db18nBundle": "" }
+    },
+    "target-dir": "Teo/Db18nBundle",
+    "extra": {
+    }
+}

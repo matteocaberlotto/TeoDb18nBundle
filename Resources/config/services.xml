@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <!--
+    <parameters>
+        <parameter key="teo_db18n.example.class">Teo\Db18nBundle\Example</parameter>
+    </parameters>
+    -->
+    <services>
+        <service id="sonata.admin.labels" class="Teo\Db18nBundle\Admin\LabelAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Content" label="Labels"/>
+            <argument />
+            <argument>Teo\Db18nBundle\Entity\Label</argument>
+            <argument />
+            <call method="setTranslationDomain">
+                <argument>TeoProductBundle</argument>
+            </call>
+        </service>
+
+        <service id="teo_db18n.twig.extension" class="Teo\Db18nBundle\Twig\Db18nExtension">
+            <tag name="twig.extension"/>
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="session" />
+            <argument>%locale%</argument>
+        </service>
+    </services>
+
+</container>

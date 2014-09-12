@@ -14,26 +14,15 @@ class LabelRepository extends EntityRepository
 {
     public function findTranslation($string, $locale, $default)
     {
-        // $q = $this->createQueryBuilder('l');
-        // $q
-        //     ->select('l', 't')
-        //     ->leftJoin('l.translations', 't')
-        //     ->where('l.name = :name')
-        //     ->setParameters(array(
-        //         'name' => $string
-        //     ));
-
-        // $result = $q
-        //     ->getQuery()
-        //     ->setFetchMode("Teo\Db18nBundle\Entity\Label", "translations", "EAGER")
-        //     ->getOneOrNullResult();
-
         $result = $this->findOneBy(array(
             'name' => $string
         ));
 
         if ($result) {
-            return $result->getTranslationForLocale($locale, $default)->getContent();
+            $content = $result->getTranslationForLocale($locale, $default);
+            if ($content) {
+                return $content->getContent();
+            }
         }
 
         return null;

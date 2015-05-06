@@ -59,7 +59,9 @@ EOF
                 'translatable' => $label
                 ));
 
-            $labels [$label->getName()]= $translation->getContent();
+            if ($translation) {
+                $labels [$label->getName()]= $translation->getContent();
+            }
         }
 
         if ($input->getOption('dump-messages')) {

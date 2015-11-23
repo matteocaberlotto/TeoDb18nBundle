@@ -22,8 +22,11 @@
 
         <service id="teo_db18n.twig.extension" class="Teo\Db18nBundle\Twig\Db18nExtension">
             <tag name="twig.extension"/>
-            <argument type="service" id="doctrine.orm.entity_manager" />
-            <argument type="service" id="session" />
+            <argument type="service" id="teo_db18n.trans"/>
+        </service>
+
+        <service id="teo_db18n.trans" class="Teo\Db18nBundle\Helper\Translation">
+            <argument type="service" id="service_container"/>
             <argument>%locale%</argument>
         </service>
     </services>

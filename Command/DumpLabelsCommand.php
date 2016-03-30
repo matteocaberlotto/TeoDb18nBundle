@@ -29,7 +29,7 @@ class DumpLabelsCommand extends ContainerAwareCommand
                     'Should the update be done'
                 )
             ))
-            ->setDescription('Warms up an empty cache')
+            ->setDescription('Dumps labels to file')
             ->setHelp(<<<EOF
 Dump labels to file in order to avoid db access and speed up things
 EOF
@@ -56,7 +56,7 @@ EOF
         foreach ($allLabels as $label) {
             $translation = $this->getContainer()->get('doctrine')->getRepository('Teo\Db18nBundle\Entity\LabelTranslation')->findOneBy(array(
                 'locale' => $locale,
-                'translatable' => $label
+                'content' => $label
                 ));
 
             if ($translation) {
@@ -95,11 +95,11 @@ EOF
     }
 
     protected function getStringFor($index, $label) {
-        return sprintf("'%s':'%s'\r\n", $this->escapeQuotes($index), $this->escapeQuotes($label));
+        return sprintf("'%s': '%s'\r\n", $this->escapeQuotes($index), $this->escapeQuotes($label));
     }
 
     protected function escapeQuotes($string)
     {
-        return str_replace("'", "\'", $string);
+        return str_replace("'", "''", $string);
     }
 }

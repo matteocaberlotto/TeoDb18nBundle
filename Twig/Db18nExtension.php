@@ -23,6 +23,20 @@ class Db18nExtension extends \Twig_Extension
         return $this->translator->trans($string);
     }
 
+    protected function getLocale()
+    {
+        $locale = $this->session->get('_locale');
+        if (empty($locale)) {
+            return $this->getDefaultLocale();
+        }
+        return $locale;
+    }
+
+    public function getDefaultLocale()
+    {
+        return $this->default_locale;
+    }
+
     public function getName()
     {
         return 'db18n_extension';

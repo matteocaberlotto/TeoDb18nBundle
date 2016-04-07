@@ -14,17 +14,21 @@ class LabelAdmin extends Admin
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper->add('name');
-        $formMapper->add('translations', 'a2lix_translations', array(
-            'required' => false,
-            'fields' => array(
-                'content' => array(
-                    'attr' => array(
-                        'class' => 'translation-textarea'
-                    )
-                )
-            )
-        ));
+        $formMapper
+            ->add('name')
+            ->add('translations')
+            ;
+
+        // $formMapper->add('translations', 'a2lix_translations', array(
+        //     'required' => false,
+        //     'fields' => array(
+        //         'content' => array(
+        //             'attr' => array(
+        //                 'class' => 'translation-textarea'
+        //             )
+        //         )
+        //     )
+        // ));
     }
 
     // Fields to be shown on filter forms
@@ -41,7 +45,6 @@ class LabelAdmin extends Admin
         $listMapper
             ->addIdentifier('name')
             ->add('translations', null, array(
-                'Translations' => 'Preview',
                 'template' => 'TeoDb18nBundle:Admin:label_translation.html.twig'
             ))
         ;

@@ -2,58 +2,42 @@
 
 namespace Teo\Db18nBundle\Entity;
 
-class LabelTranslation
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Translatable\Entity\MappedSuperclass\AbstractPersonalTranslation;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="label_translation",
+ *     uniqueConstraints={@ORM\UniqueConstraint(name="lookup_unique_idx", columns={
+ *         "locale", "object_id", "field"
+ *     })}
+ * )
+ * @ORM\Entity(repositoryClass="Teo\Db18nBundle\Entity\LabelTranslationRepository")
+ */
+class LabelTranslation extends AbstractPersonalTranslation
 {
-    protected $translatable;
-
-    protected $content;
-
-    public function setContent($content)
+    /**
+     * Convenient constructor
+     *
+     * @param string $locale
+     * @param string $field
+     * @param string $value
+     */
+    public function __construct($locale, $field, $value)
     {
-        $this->content = $content;
-
-        return $this;
+        $this->setLocale($locale);
+        $this->setField($field);
+        $this->setContent($value);
     }
 
-    public function getContent()
+    public function __toString()
     {
-        return $this->content;
+        return (string) $this->getContent();
     }
 
     /**
-     * Here follows the A2lix bundle trait Translatable
+     * @ORM\ManyToOne(targetEntity="Label", inversedBy="translations")
+     * @ORM\JoinColumn(name="object_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $id;
-
-    /**
-     * @var string
-     */
-    protected $locale;
-
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function getTranslatable()
-    {
-        return $this->translatable;
-    }
-
-    public function setTranslatable($translatable)
-    {
-        $this->translatable = $translatable;
-        return $this;
-    }
-
-    public function getLocale()
-    {
-        return $this->locale;
-    }
-
-    public function setLocale($locale)
-    {
-        $this->locale = $locale;
-        return $this;
-    }
+    protected $object;
 }

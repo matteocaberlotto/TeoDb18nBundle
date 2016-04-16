@@ -16,22 +16,8 @@ class LabelAdmin extends Admin
     {
         $formMapper
             ->add('name')
-            ->add('translations', 'a2lix_translations', array(
-                'locales' => array('it', 'en', 'de', 'fr'),
-                'default_locale' => 'en'
-                ))
+            ->add('translations', 'a2lix_translations')
             ;
-
-        // $formMapper->add('translations', 'a2lix_translations', array(
-        //     'required' => false,
-        //     'fields' => array(
-        //         'content' => array(
-        //             'attr' => array(
-        //                 'class' => 'translation-textarea'
-        //             )
-        //         )
-        //     )
-        // ));
     }
 
     // Fields to be shown on filter forms

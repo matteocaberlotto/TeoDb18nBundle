@@ -16,7 +16,10 @@ class LabelAdmin extends Admin
     {
         $formMapper
             ->add('name')
-            ->add('translations')
+            ->add('translations', 'a2lix_translations', array(
+                'locales' => array('it', 'en', 'de', 'fr'),
+                'default_locale' => 'en'
+                ))
             ;
 
         // $formMapper->add('translations', 'a2lix_translations', array(

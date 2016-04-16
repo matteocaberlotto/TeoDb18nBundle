@@ -18,6 +18,11 @@ class LabelTranslation
      */
     protected $content;
 
+    public function __toString()
+    {
+        return (string) $this->content;
+    }
+
     public function getContent()
     {
         return $this->content;

@@ -11,7 +11,7 @@ INSTALLATION:
 
 	```new Teo\Db18nBundle\TeoDb18nBundle()```
 
-- bundle requires SonataAdminBundle to have admin working and a2lix behaviour + a2lix translation form to have translations
+- bundle requires SonataAdminBundle to have admin working and knp behaviour + a2lix translation form to have translations
 
 
 USAGE:

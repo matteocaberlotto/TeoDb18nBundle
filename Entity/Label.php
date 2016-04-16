@@ -3,25 +3,19 @@
 namespace Teo\Db18nBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
-use Gedmo\Mapping\Annotation as Gedmo;
-
-use Gedmo\Translatable\Translatable;
-use Sonata\TranslationBundle\Traits\Gedmo\PersonalTranslatable;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use AppBundle\Entity\LabelTranslation;
 
 /**
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="label")
  * @ORM\Entity(repositoryClass="Teo\Db18nBundle\Entity\LabelRepository")
- * @Gedmo\TranslationEntity(class="AppBundle\Entity\LabelTranslation")
  */
 class Label
 {
-    use PersonalTranslatable;
+    use ORMBehaviors\Translatable\Translatable;
 
     /**
      * @ORM\Column(type="integer")
@@ -31,24 +25,9 @@ class Label
     protected $id;
 
     /**
-     * @Gedmo\Translatable
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     protected $name;
-
-    /**
-     * @ORM\OneToMany(
-     *   targetEntity="LabelTranslation",
-     *   mappedBy="object",
-     *   cascade={"persist", "remove"}
-     * )
-     */
-    protected $translations;
-
-    public function __construct()
-    {
-        $this->translations = new ArrayCollection();
-    }
 
     public function __toString()
     {

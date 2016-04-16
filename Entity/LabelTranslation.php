@@ -3,41 +3,30 @@
 namespace Teo\Db18nBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Translatable\Entity\MappedSuperclass\AbstractPersonalTranslation;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="label_translation",
- *     uniqueConstraints={@ORM\UniqueConstraint(name="lookup_unique_idx", columns={
- *         "locale", "object_id", "field"
- *     })}
- * )
  * @ORM\Entity(repositoryClass="Teo\Db18nBundle\Entity\LabelTranslationRepository")
  */
-class LabelTranslation extends AbstractPersonalTranslation
+class LabelTranslation
 {
-    /**
-     * Convenient constructor
-     *
-     * @param string $locale
-     * @param string $field
-     * @param string $value
-     */
-    public function __construct($locale, $field, $value)
-    {
-        $this->setLocale($locale);
-        $this->setField($field);
-        $this->setContent($value);
-    }
-
-    public function __toString()
-    {
-        return (string) $this->getContent();
-    }
+    use ORMBehaviors\Translatable\Translation;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Label", inversedBy="translations")
-     * @ORM\JoinColumn(name="object_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\Column(type="text", nullable=true)
      */
-    protected $object;
+    protected $content;
+
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    public function setContent($content)
+    {
+        $this->content = $content;
+
+        return $this;
+    }
 }

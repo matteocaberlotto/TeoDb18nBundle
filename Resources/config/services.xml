@@ -11,7 +11,7 @@
     -->
     <services>
         <service id="sonata.admin.labels" class="Teo\Db18nBundle\Admin\LabelAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="Content" label="Labels"/>
+            <tag name="sonata.admin" manager_type="orm" group="Translations" label="Labels"/>
             <argument />
             <argument>Teo\Db18nBundle\Entity\Label</argument>
             <argument />
